@@ -52,6 +52,7 @@ router.post("/get-all-transactions", async (req, res) => {
             },
           }),
 
+      // ko tìm hết all transaction, chỉ tìm theo userid
       userid: req.body.userid,
       ...(type !== "all" && { type }),
     });

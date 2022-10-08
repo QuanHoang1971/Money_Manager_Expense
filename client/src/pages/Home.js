@@ -12,10 +12,10 @@ export default function Home() {
   const [showAddEditTransactionModal, setShowAddEditTransactionModal] =
     useState(false);
 
+  // create hook
   const [loading, setLoading] = useState(false);
   const [transactionsData, setTransactionsData] = useState([]);
   const [frequency, setFrequency] = useState("7");
-  // create hook
   const [selectedRange, setSelectedRange] = useState([]);
   const [type, setType] = useState("all");
   const [selectedItemForEdit, setSelectedItemForEdit] = useState(null);
@@ -26,6 +26,7 @@ export default function Home() {
       setLoading(true);
       const response = await axios.post(
         "/api/transactions/get-all-transactions",
+        //  post userid, frequencey,type đến server
         {
           userid: user._id,
           frequency,
@@ -64,6 +65,7 @@ export default function Home() {
   }, [frequency, selectedRange, type]);
   // depedencies mỗi khi thay đổi frequency sẽ call tới transactionRoute
 
+  // antd form, dataIndex giống vs trường dữ liệu khi khai báo transaction
   const columns = [
     {
       title: "Date",
@@ -123,6 +125,7 @@ export default function Home() {
               <Select.Option value="custom">Custom</Select.Option>
             </Select>
 
+            {/* custom  */}
             {frequency === "custom" && (
               <div className="mt-2">
                 <RangePicker
@@ -158,7 +161,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* if showAddEditTransactionModal open, AddEditTransaction components sẽ send props */}
+      {/* if showAddEditTransactionModal open, sẽ send props tới AddEditTransaction   */}
       {showAddEditTransactionModal && (
         <AddEditTransaction
           showAddEditTransactionModal={showAddEditTransactionModal}

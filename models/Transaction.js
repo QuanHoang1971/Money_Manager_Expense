@@ -1,3 +1,4 @@
+// tạo model trước khi tạo route
 //  Add Transaction có những gì thì đưa vào đây
 const mongoose = require("mongoose");
 

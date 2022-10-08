@@ -9,6 +9,8 @@ import Spinner from "../components/Spinner";
 function Register() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(true);
+
+  // tạo hàm onFinish cho Form khi click , setLoading trong khi await API
   const onFinish = async (values) => {
     try {
       setLoading(true);
@@ -21,7 +23,7 @@ function Register() {
     }
   };
 
-  useEffect(() => {
+    useEffect(() => {
     if (localStorage.getItem("money-user")) {
       navigate("/");
     }
@@ -30,8 +32,11 @@ function Register() {
   return (
     <div className="register">
       {loading && <Spinner />}
+
+      {/* bootstrap chia làm 2 phần, animation và register info */}
       <div className="row justify-content-center align-items-center w-100 h-100">
-        <div className="col-md-5">
+        {/* animation */}
+        <div className="col-md-6">
           <div className="lottie">
             <lottie-player
               src="https://assets3.lottiefiles.com/packages/lf20_06a6pf9i.json"
@@ -43,6 +48,7 @@ function Register() {
           </div>
         </div>
         <div className="col-md-4">
+          {/* vertical để cách dãn các dòng ra */}
           <Form layout="vertical" onFinish={onFinish}>
             <h1>REGISTER</h1>
 
@@ -58,9 +64,7 @@ function Register() {
 
             <div className="d-flex justify-content-between align-items-center">
               <Link to="/login">Already Registered , Click Here To Login</Link>
-              <button className="secondary" type="submit">
-                REGISTER
-              </button>
+              <button className="secondary">REGISTER</button>
             </div>
           </Form>
         </div>

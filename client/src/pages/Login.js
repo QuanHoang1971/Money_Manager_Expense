@@ -10,12 +10,14 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   // login ok sẽ navigate về trang chủ
   const navigate = useNavigate();
+
   const onFinish = async (values) => {
     try {
       setLoading(true);
       const response = await axios.post("/api/users/login", values);
       localStorage.setItem(
         "money-user",
+        // ko show password ở localStorage
         JSON.stringify({ ...response.data, password: "" })
       );
       setLoading(false);
@@ -26,6 +28,7 @@ export default function Login() {
       message.error("Login failed");
     }
   };
+
   // useEffect cập nhật vào local để nếu tồn tại item rồi thì sẽ navigate tới trang chủ luôn
   useEffect(() => {
     if (localStorage.getItem("money-user")) {
@@ -38,7 +41,7 @@ export default function Login() {
       <div className="row justify-content-center align-items-center w-100 h-100">
         <div className="col-md-4">
           <Form layout="vertical" onFinish={onFinish}>
-            <h1>Login</h1>
+            <h1>Login PiPi</h1>
 
             <Form.Item label="Email" name="email">
               <Input />

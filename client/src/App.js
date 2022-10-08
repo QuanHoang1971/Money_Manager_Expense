@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 
+// App là nơi điều hướng Route
 function App() {
   return (
     <div className="App">
@@ -28,6 +29,7 @@ function App() {
 }
 
 // nếu ko phải là data money-user thì sẽ ko vào đc trang home, vào login page
+// nếu getItem money-user đc thì mới return props.childern ở Default Layout
 export function ProtectedRoute(props) {
   if (localStorage.getItem("money-user")) {
     return props.children;

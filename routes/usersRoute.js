@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../models/User");
 const router = express.Router();
 
+// khi ng dùng gửi thông tin login lên server
 router.post("/login", async function (req, res) {
   try {
     const result = await User.findOne({
@@ -9,6 +10,7 @@ router.post("/login", async function (req, res) {
       password: req.body.password,
     });
 
+    // error handling
     if (result) {
       res.send(result);
     } else {
@@ -19,6 +21,7 @@ router.post("/login", async function (req, res) {
   }
 });
 
+// register ngược vs login
 router.post("/register", async function (req, res) {
   try {
     const newuser = new User(req.body);

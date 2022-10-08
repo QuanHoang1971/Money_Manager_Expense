@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 // import dbConnect vào server
 const dbConnect = require("./dbConnect");
+const path = require("path");
 app.use(express.json());
 const userRoute = require("./routes/usersRoute");
 const transactionsRoute = require("./routes/transactionsRoute");
@@ -14,9 +15,12 @@ const transactionsRoute = require("./routes/transactionsRoute");
 app.use("/api/users/", userRoute);
 app.use("/api/transactions/", transactionsRoute);
 
+// production = server
 if (process.env.NODE_ENV === "production") {
+  // client folder
   app.use("/", express.static("client/build"));
 
+  // backend for deployment
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client/build/index.html"));
   });
